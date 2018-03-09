@@ -24,18 +24,22 @@ function filterAsyncRouter (asyncRouterMap, resMap) {
 const permission = {
   state: {
     routers: constantRouterMap,
+    // 动态路由列表
     addRouters: []
   },
   mutations: {
-    SET_ROUTERS: (state, routers) => {
-      state.addRouters = routers.concat({ path: '*', redirect: '/401', hidden: true })
-      state.routers = constantRouterMap.concat(routers)
+    SET_ROUTERS: (state, accessedRouters) => {
+      state.addRouters = accessedRouters.concat({ path: '*', redirect: '/401', hidden: true })
+      state.routers = constantRouterMap.concat(accessedRouters)
     }
   },
   actions: {
     GenerateRoutes ({ commit }, data) {
       return new Promise(resolve => {
         let accessedRouters
+        /**
+         * describe 注释动态路由部分，暂时全局放开
+         * */
         /* if (data.roleCode === 'JX_ADMIN') {
           accessedRouters = asyncRouterMap
         } else {
@@ -44,7 +48,8 @@ const permission = {
         /* if(data.resMap){
               accessedRouters = filterAsyncRouter(asyncRouterMap,data.resMap);
           } */
-        accessedRouters = asyncRouterMap // 返回所有路由
+        // 返回所有路由
+        accessedRouters = asyncRouterMap
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

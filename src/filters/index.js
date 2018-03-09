@@ -1,9 +1,12 @@
+let localStorage = require('storejs')
+
 function pluralize (time, label) {
   if (time === 1) {
     return time + label
   }
   return time + label + 's'
 }
+
 export function timeAgo (time) {
   const between = Date.now() / 1000 - Number(time)
   if (between < 3600) {
@@ -15,7 +18,7 @@ export function timeAgo (time) {
   }
 }
 
-let localStorage = require('storejs')
+
 export function parseArea (id) { // 片区
   if (localStorage('loadOrgCache').orgMap) {
     return localStorage('loadOrgCache').orgMap[id]

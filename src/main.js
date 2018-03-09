@@ -3,28 +3,27 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
-import 'nprogress/nprogress.css'
-import IconSvg from '@/components/Icon-svg/index.vue'
+// 地图
 import VueAMap from 'vue-amap'
-import * as filters from './filters' // 全局filter
+// 全局filter 过滤器
+import * as filters from './filters'
 import publicFunction from './utils/publicFun'
+// 表格校验
 import Validate from './utils/validation'
-import refreshIcon from '@/components/refreshIcon/index.vue'
-import clzPopover from '@/components/Popover'
+
+// 路由拦截器
 import './permission'
-Vue.prototype.localStorage = require('storejs')
 
-Vue.component('refresh-icon', refreshIcon)
-Vue.component('clz-popover', clzPopover)
+import 'nprogress/nprogress.css'
+
 Vue.use(Validate)
-
-Vue.use(publicFunction) // 公共方法
+// 自定义插件  所有的插件全部应该放入这个地方
+Vue.use(publicFunction)
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-Vue.component('icon-svg', IconSvg)
 
-// register global utility filters.
+// 注入全局过滤器
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })

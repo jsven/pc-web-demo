@@ -10,7 +10,6 @@ const service = axios.create({
   // baseURL: window._Host.BASE_API, // api的base_url
   timeout: 60000 ,                 // 请求超时时间
 //  headers: {"Authorization": "bearer "+ Cookies.get('ACCESS_TOKEN') }
-
 });
 // request拦截器
 service.interceptors.request.use(config => {

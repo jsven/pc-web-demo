@@ -1,7 +1,12 @@
 /* eslint-disable one-var,no-undef,no-redeclare */
+import refreshIcon from '@/components/refreshIcon/index.vue'
+import clzPopover from '@/components/Popover'
 export default{
   install: function (Vue, options) {
-    Vue.prototype.exportFile = function (obj) { // 导出处理方法
+    Vue.component('refresh-icon', refreshIcon)
+    Vue.component('clz-popover', clzPopover)
+    // 导出处理方法
+    Vue.prototype.exportFile = function (obj) {
       let formData = []
       for (let i in obj) {
         if (obj[i] !== '') {
@@ -21,7 +26,9 @@ export default{
       return str
     }
 
-    Vue.prototype.parseObj = function (localStorageData) { // 解析obj 只包含KEY 和VALUE
+    Vue.prototype.localStorage = require('storejs')
+    // 解析obj 只包含KEY 和VALUE
+    Vue.prototype.parseObj = function (localStorageData) {
       let obj = []
       for (let item in localStorageData) {
         let data = {value: item, label: localStorageData[item]}
@@ -29,8 +36,8 @@ export default{
       }
       return obj
     }
-
-    Vue.prototype.parseList = function (localStorageData) { // 解析List 包含所有列表子项
+    // 解析List 包含所有列表子项
+    Vue.prototype.parseList = function (localStorageData) {
       let obj = []
       for (let item in localStorageData) {
         obj.push(localStorageData[item])
